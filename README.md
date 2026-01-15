@@ -8,7 +8,7 @@ This template is bootstrapped with
 [create-react-app](https://github.com/facebookincubator/create-react-app) with some additions,
 namely server side rendering, code-splitting, and a custom CSS setup.
 
-## Quick start
+## Quick start 
 
 ### Setup localhost 
 
