@@ -23,7 +23,7 @@ yarn run config                                       # add the mandatory env va
 yarn run dev                                          # start the dev server, this will open a browser in localhost:3000
 ```
 
-You can also follow along the
+You can also follow along the 
 [Getting started with Sharetribe Web Template](https://www.sharetribe.com/docs/introduction/getting-started-with-web-template/)
 tutorial in the [Sharetribe Developer Docs](https://www.sharetribe.com/docs/).
 
