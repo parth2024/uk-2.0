@@ -1,0 +1,114 @@
+services:
+  - type: web
+    name: uk-marketplace
+    runtime: node
+    plan: starter # Change to 'standard' or 'pro' for production
+    buildCommand: yarn install && yarn run build
+    startCommand: node --icu-data-dir=node_modules/full-icu server/index.js
+    envVars:
+      # Node Environment
+      - key: NODE_ENV
+        value: production
+
+      # Port (Render provides this automatically)
+      - key: PORT
+        value: 10000
+
+      # ===== REQUIRED: Sharetribe Configuration =====
+      # Get these from your Sharetribe Console: https://console.sharetribe.com/
+      - key: REACT_APP_SHARETRIBE_SDK_CLIENT_ID
+        sync: false # Set this value in Render Dashboard
+
+      - key: SHARETRIBE_SDK_CLIENT_SECRET
+        sync: false # Set this value in Render Dashboard
+
+      - key: REACT_APP_MARKETPLACE_NAME
+        value: Your Marketplace Name # Change this to your marketplace name
+
+      # This should be your Render app URL
+      - key: REACT_APP_MARKETPLACE_ROOT_URL
+        value: https://uk-marketplace.onrender.com # Update with your actual Render URL
+
+      # ===== SSL Configuration =====
+      - key: REACT_APP_SHARETRIBE_USING_SSL
+        value: true
+
+      - key: SERVER_SHARETRIBE_REDIRECT_SSL
+        value: true
+
+      - key: SERVER_SHARETRIBE_TRUST_PROXY
+        value: true
+
+      # ===== Optional: Stripe Configuration (for payments) =====
+      # - key: REACT_APP_STRIPE_PUBLISHABLE_KEY
+      #   sync: false # Set this in Render Dashboard if using Stripe
+      #
+      # - key: STRIPE_SECRET_KEY
+      #   sync: false # Set this in Render Dashboard if using Stripe
+
+      # ===== Optional: Mapbox Configuration (for maps) =====
+      # - key: REACT_APP_MAPBOX_ACCESS_TOKEN
+      #   sync: false # Set this in Render Dashboard if using Mapbox
+
+      # ===== Optional: Google OAuth =====
+      # - key: REACT_APP_GOOGLE_CLIENT_ID
+      #   sync: false
+      #
+      # - key: GOOGLE_CLIENT_SECRET
+      #   sync: false
+
+      # ===== Optional: Facebook OAuth =====
+      # - key: REACT_APP_FACEBOOK_APP_ID
+      #   sync: false
+      #
+      # - key: FACEBOOK_APP_SECRET
+      #   sync: false
+
+      # ===== Optional: Sentry Error Tracking =====
+      # - key: REACT_APP_SENTRY_DSN
+      #   sync: false
+      #
+      # - key: SENTRY_DSN
+      #   sync: false
+
+      # ===== Optional: Analytics =====
+      # - key: REACT_APP_GOOGLE_ANALYTICS_ID
+      #   value: UA-XXXXXXXXX-X
+
+      # ===== Optional: Content Security Policy =====
+      - key: REACT_APP_CSP
+        value: report # Use 'block' for strict CSP, 'report' for monitoring only
+
+      # ===== Optional: Basic Authentication (for staging) =====
+      # Uncomment these to protect your staging environment
+      # - key: BASIC_AUTH_USERNAME
+      #   value: admin
+      #
+      # - key: BASIC_AUTH_PASSWORD
+      #   sync: false # Set a secure password in Render Dashboard
+
+      # ===== Optional: Canonical Root URL =====
+      - key: REACT_APP_CANONICAL_ROOT_URL
+        value: https://uk-marketplace.onrender.com # Update with your actual domain
+
+    # Health check endpoint
+    healthCheckPath: /_status.json
+
+    # Auto-deploy from your Git repository
+    autoDeploy: true
+
+    # Disk for storing logs and temporary files
+    disk:
+      name: data
+      mountPath: /app/data
+      sizeGB: 1
+
+    # Node version specification
+    buildFilter:
+      paths:
+        - src/**
+        - server/**
+        - public/**
+        - scripts/**
+        - package.json
+        - yarn.lock
