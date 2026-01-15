@@ -10,7 +10,7 @@ namely server side rendering, code-splitting, and a custom CSS setup.
 
 ## Quick start
 
-### Setup localhost
+### Setup localhost 
 
 If you just want to get the app running quickly to test it out, first install
 [Node.js](https://nodejs.org/) and [Yarn](https://yarnpkg.com/), and follow along:
